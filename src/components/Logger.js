@@ -17,21 +17,20 @@ function Logger() {
   const walletUser = useSelector((state) => state.walletUser);
   const user = useSelector((store) => store.user);
   const addOnBlockchain = async () => {
-    const id = idRef.current.value;
+    const id = id1;
+    // console.log("id");
     const place = "Dwarka,New";
     const date = new Date();
     const timeStamp = Date.parse(date) / 1000;
     if (id.length == 0 || place.length == 0 || date.length == 0) return;
     const docRef = doc(db, `orders`, id);
     const docSnap = await getDoc(docRef);
+    // console.log(docSnap.data());
     if (docSnap.exists()) {
       let order = docSnap.data();
       setAdding(true);
       await addDetail(order.timeStamp, place, timeStamp);
       setAdding(false);
-      idRef.current.value = "";
-      placeRef.current.value = "";
-      dateRef.current.value = "";
     } else {
       setError("No Such Order Exist !");
       setTimeout(() => setError(""), 5000);
