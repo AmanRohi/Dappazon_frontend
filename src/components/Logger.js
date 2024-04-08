@@ -15,8 +15,8 @@ function Logger() {
   const user = useSelector((store) => store.user);
   const addOnBlockchain = async () => {
     const id = idRef.current.value;
-    const place = placeRef.current.value;
-    const date = dateRef.current.value;
+    const place = "Dwarka,New";
+    const date = new Date();
     const timeStamp = Date.parse(date) / 1000;
     if (id.length == 0 || place.length == 0 || date.length == 0) return;
     const docRef = doc(db, `orders`, id);
@@ -57,18 +57,7 @@ function Logger() {
           {error?.length > 0 ? (
             <div className="text-red-500 -my-4">{error}</div>
           ) : null}
-          <input
-            type="text"
-            ref={placeRef}
-            placeholder="Enter The Place"
-            className="px-2 py-2 w-full outline-none rounded-md   shadow-sm shadow-gray-500"
-          />
-          <input
-            type="date"
-            ref={dateRef}
-            placeholder="Enter The Date"
-            className="px-2 py-2 w-full outline-none rounded-md  shadow-sm shadow-gray-500 "
-          />
+
           {adding && (
             <div className="bg-orange-600 px-4 py-2 rounded-md my-4 flex justify-center items-center">
               <ThreeDots height="24" width="152" radius="1" color="#FFFFFF" />

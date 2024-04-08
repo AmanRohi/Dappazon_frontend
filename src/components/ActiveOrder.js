@@ -9,13 +9,14 @@ import { doc, deleteDoc } from "firebase/firestore";
 import { db } from "../firebaseconfig";
 import { useNavigate } from "react-router-dom";
 
+
 function ActiveOrder({ activeOrder, getOrders }) {
   const dispatch = useDispatch();
   const [logs, setLogs] = useState([]);
   const user = useSelector((state) => state.user);
   const navigate = useNavigate();
   const getAllLogs = async () => {
-    let loggs = await getLogs(activeOrder.timeStamp);
+    let loggs = await getLogs(activeOrder.timeStamp,activeOrder.id);
     setLogs(loggs);
   };
   useEffect(() => {
@@ -76,6 +77,7 @@ function ActiveOrder({ activeOrder, getOrders }) {
               <div className="bg-orange-400 p-2 text-white text[12px] rounded-lg">
                 <p className="text-black font-semibold">{log.place}</p>
                 <p>{new Date(log.timeStamp * 1000).toDateString()}</p>
+                <p>{log.temperature} °C</p>
               </div>
             );
           })}
