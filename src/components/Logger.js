@@ -5,7 +5,10 @@ import { db } from "../firebaseconfig";
 import { addDetail } from "../utils";
 import { ThreeDots } from "react-loader-spinner";
 import { useSelector } from "react-redux";
+import App1 from "../qr-code";
+
 function Logger() {
+  let [id1,setId1]=useState();
   const idRef = useRef();
   const placeRef = useRef();
   const dateRef = useRef();
@@ -40,6 +43,9 @@ function Logger() {
       className="py-4 w-screen scrollbar-hide  h-screen
     px-4 md:px-16 gap-4 flex justify-center items-center"
     >
+    <App1 setId={(id)=>{
+            setId1(id);
+          }}/>
       <div
         className="w-[600px] h-[400px] bg-gradient-to-b 
        from-[#232f3e] to-[#131921] shadow-lg  shadow-gray-300/90 rounded-md p-4"
@@ -50,9 +56,10 @@ function Logger() {
         <div className="flex justify-center items-center w-full flex-wrap gap-6">
           <input
             type="text"
-            ref={idRef}
+            value={id1}
             placeholder="Enter The Order Id"
             className="px-2 py-2 w-full outline-none rounded-md   shadow-sm shadow-gray-500"
+            readonly
           />
           {error?.length > 0 ? (
             <div className="text-red-500 -my-4">{error}</div>
